@@ -1,0 +1,23 @@
+version: 0.0
+
+os: linux
+
+files:
+  - source: /
+    destination: /opt/codepipeline-poc
+
+hooks:
+  ApplicationStop:
+    - location: scripts/stop_application.sh
+      timeout: 30
+      runas: root
+
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 60
+      runas: root
+
+  ApplicationStart:
+    - location: scripts/start_application.sh
+      timeout: 30
+      runas: root
