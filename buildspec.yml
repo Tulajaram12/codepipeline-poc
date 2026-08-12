@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies"
+      - python3 --version
+      - pip3 install -r requirements.txt -t package/
+
+  build:
+    commands:
+      - echo "Copying application files"
+      - cp app.py package/
+      - cp requirements.txt package/
+      - cp appspec.yml package/
+      - cp -r scripts package/
+
+  post_build:
+    commands:
+      - echo "Build completed"
+
+artifacts:
+  base-directory: package
+  files:
+    - '**/*'
